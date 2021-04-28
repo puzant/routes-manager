@@ -11,7 +11,7 @@ export const icon = new Icon({
   iconSize: [25, 25]
 });
 
-const App = () => {
+export const App = () => {
 
   const [showRouteOptions, setShowRouteOptions] = React.useState(null)
   const [completedRoutes, setCompletedRoutes] = React.useState([])
@@ -31,50 +31,46 @@ const App = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {
-          data?.stops?.map((stop) => {
-            return (
-              <div key={stop.id}>
-                <Marker 
-                  key={stop.id}
-                  position={[stop.address.lat, stop.address.lng]} 
-                >
-                  <Tooltip>{stop.information.name}</Tooltip>
-                  </Marker>
-                <Polyline
-                  key={stop.id}
-                  positions={cordinates}
-                />
-              </div>
-            )
-          })
-        }
+        {data?.stops.map((stop) => {
+          return (
+            <div key={stop.id}>
+              <Marker 
+                key={stop.id}
+                position={[stop.address.lat, stop.address.lng]} 
+              >
+                <Tooltip>{stop.information.name}</Tooltip>
+                </Marker>
+              <Polyline
+                key={stop.id}
+                positions={cordinates}
+              />
+            </div>
+          )
+        })
+      }
 
       </MapContainer>
 
       <StopsInfoContainer>
         <RouteText>Route 1</RouteText>
         <StopsOverview>
-          <span>0/{data.stops.length} • </span>
+          <span>{completedRoutes.length}/{data.stops.length} • </span>
           <span>{Math.floor(data.total_distance / 1000)} KM •</span>
           <span>{Math.floor(data.total_driving_time / 3600)} Hr</span>
         </StopsOverview> 
-
       </StopsInfoContainer>
 
       <RoutesContainer>
-      {
-        data.stops.map((stop) => {
-          return (
-              <Route 
-                key={stop.id}
-                onRouteSelect={(id) => setShowRouteOptions(id)} 
-                stop={stop}
-                selectedRoute={showRouteOptions === stop.id}
-                onRouteFinish={(id) => handleCompletedRoutes(id)}
-                completedRoute={completedRoutes.includes(stop.id)}
-              />
-            
+      {data.stops.map((stop) => {
+        return (
+            <Route 
+              key={stop.id}
+              onRouteSelect={(id) => setShowRouteOptions(id)} 
+              stop={stop}
+              selectedRoute={showRouteOptions === stop.id}
+              onRouteFinish={(id) => handleCompletedRoutes(id)}
+              completedRoute={completedRoutes.includes(stop.id)}
+            />
           )
         })
       }
@@ -85,13 +81,12 @@ const App = () => {
   );
 }
 
-export default App
-
 const MainAppContainer = styled.div`
 `
 
 const StopsInfoContainer = styled.div`
   padding: 24px;
+  box-shadow: inset 0px -1px 1px 1px rgb(0 0 0 / 20%);
 `
 
 const RouteText = styled.div`

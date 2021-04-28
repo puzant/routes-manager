@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 export const Route = ({ stop, onRouteSelect, selectedRoute, onRouteFinish, completedRoute }) => {
   return (
     <StopOverview selectedRoute={selectedRoute} onClick={() => onRouteSelect(stop.id)}>
-      <Block align='center'>
+      <Block align='center' gap={4}>
         <RouteNumber selectedRoute={selectedRoute} >{stop.sequence_number+1}</RouteNumber>
         <VerticalLine selectedRoute={selectedRoute} />
       </Block>
@@ -55,17 +55,19 @@ const StopOverview = styled.div`
   display: flex;
   gap: 33px;
   padding: 37px;
-  background: ${props => props.selectedRoute ? '#f0f1fc' : '#fff'};
+  background: ${props => props.selectedRoute ? '#F6F9FE' : '#fff'};
 `
 
 const VerticalLine = styled.div`
-  border-left: 1px solid #1329FE;
+  border-left: 2px solid #1329FE;
   height: ${props => props.selectedRoute ? '100px' : '34px'};
+  opacity: ${props => !props.selectedRoute && '.3'};
 `
 
 const RouteNumber = styled.span`
   color: #1329FE;
   font-size: ${props => props.selectedRoute ? '24px' : '18px'};
+  opacity: ${props => !props.selectedRoute && '.3'};
   font-weight: bold;
 `
 
