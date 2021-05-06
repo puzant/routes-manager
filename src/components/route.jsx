@@ -13,7 +13,7 @@ export const Route = (
     <StopOverview selectedRoute={selectedRoute} onClick={() => onRouteSelect(stop.id)}>
   
       <RouteNumberCont>
-        <RouteNumber selectedRoute={selectedRoute} >{stop.sequence_number+1}</RouteNumber>
+        <RouteNumber selectedRoute={selectedRoute}>{stop.sequence_number+1}</RouteNumber>
         {index !== length -1 && <VerticalLine selectedRoute={selectedRoute} />}
       </RouteNumberCont>
 
@@ -26,7 +26,7 @@ export const Route = (
           {!completedRoute ?
             <Block gap={6} align='flex-end'>
               <span>{stop.arr_time_string}</span>
-              <GrayText>{stop.time_window_earliest}-{stop.time_window_latest}</GrayText>
+              <GrayText>{stop.time_window_earliest}{stop.time_window_earliest && '-'}{stop.time_window_latest}</GrayText>
             </Block>
             :
             <Block>
@@ -50,8 +50,7 @@ export const Route = (
           </RouteOptions>)
         }
 
-      </StopInformation>
-      
+      </StopInformation>      
 
     </StopOverview>
   )

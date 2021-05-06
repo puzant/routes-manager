@@ -39,7 +39,7 @@ export const App = () => {
                 position={[stop.address.lat, stop.address.lng]} 
               >
                 <Tooltip>{stop.information.name}</Tooltip>
-                </Marker>
+              </Marker>
               <Polyline
                 key={stop.id}
                 positions={cordinates}
@@ -83,7 +83,8 @@ export const App = () => {
   );
 }
 
-const MainAppContainer = styled.div``
+const MainAppContainer = styled.div`
+`
 
 const StopsInfoContainer = styled.div`
   padding: 24px;
